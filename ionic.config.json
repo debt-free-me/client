@@ -1,0 +1,7 @@
+{
+  "name": "debt-free-me",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
