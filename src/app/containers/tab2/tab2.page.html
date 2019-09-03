@@ -9,15 +9,22 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-    <ion-col col-6 *ngFor="let photo of photoService.photos">
+      <ion-col col-6 *ngFor="let photo of photoService.photos">
         <img [src]="photo.data" />
-        </ion-col>
+      </ion-col>
     </ion-row>
   </ion-grid>
-  
+
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-fab-button (click)="photoService.takePicture()">
+    <p>count: {{ count }}</p>
+    <p>isLoading: {{ isLoading }}</p>
+    <div [class]="styleSheet.classes.cameraIcon">
+      <ion-fab-button
+        [disabled]="!isFeatureOn('camera')"
+        (click)="onCameraClick()"
+      >
         <ion-icon name="camera"></ion-icon>
       </ion-fab-button>
+    </div>
   </ion-fab>
 </ion-content>

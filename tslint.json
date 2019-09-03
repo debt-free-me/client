@@ -25,7 +25,10 @@
     "label-position": true,
     "max-line-length": [
       true,
-      140
+      {
+        "limit": 80,
+        "ignore-pattern": "//|\\* "
+      }
     ],
     "member-access": false,
     "member-ordering": [
@@ -133,6 +136,19 @@
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "trailing-comma": [
+      true,
+      {
+        "singleline": "never",
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        },
+        "esSpecCompliant": true
+      }
+    ]
   }
 }
