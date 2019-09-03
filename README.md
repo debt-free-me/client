@@ -1,22 +1,13 @@
-# Ionic v4 Tutorial: Photo Gallery app
-
-A tutorial app that walks the user through creating a Photo Gallery app. We begin with the Ionic "tabs" starter app, incrementally converting the About tab to a Photo Gallery experience.
-
-## Structure
-
-The complete source code is contained within. Please follow along with the [complete guide here](https://beta.ionicframework.com/docs/developer-resources/guides/first-app-v4/intro/).
-
 ## How to Run Locally
 
-- Clone this repo.
 - Open a terminal window, and navigate to this repo on the filesystem.
 - Run "npm install" to install all required project dependencies.
 - Run "ionic serve" to run the app in a web browser locally.
 
 ## How to Install Dependencies
 
-- Install ionic globally by runing 'npm install -g inoic'
-- Install cordova globally by runing 'npm install -g cordova'
+- Install ionic globally by runing 'sudo npm install -g inoic'
+- Install cordova globally by runing 'sudo npm install -g cordova'
 
 ## How to Configurate
 
@@ -37,12 +28,15 @@ The complete source code is contained within. Please follow along with the [comp
 
 ## How to Build Android App Locally on MacOS
 
-- Run 'ionic cordova build android' (for more info https://ionicframework.com/docs/cli/commands/cordova-build)
+- Run 'npm run config && ionic cordova build android'
+- For more info https://ionicframework.com/docs/cli/commands/cordova-build
 
 ## How to Prepare for Building iOS App Locally on MacOS
 
 - Download and install xCode from MacOS AppStore
+- Agree xcode license by runing 'sudo xcodebuild -license'
 
 ## How to Build Android App Locally on MacOS
 
-- Run 'ionic cordova build ios' (for more info https://ionicframework.com/docs/cli/commands/cordova-build)
+- Run 'npm run config && ionic cordova build ios'
+- For more info https://ionicframework.com/docs/cli/commands/cordova-build
