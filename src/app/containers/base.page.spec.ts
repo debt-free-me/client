@@ -32,7 +32,10 @@ describe('BasePage', () => {
       declarations: [BasePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [NgReduxTestingModule],
-      providers: [MockNgRedux],
+      providers: [
+        MockNgRedux,
+        { provide: Boolean, useValue: true },
+      ],
     }).compileComponents();
   }));
 

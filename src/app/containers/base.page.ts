@@ -7,7 +7,7 @@ import { getConfig } from '../actions/config.action';
 import { initialState } from '../stores/config.store';
 import { FeatureType } from '../typings/feature.typing';
 import { isFeatureOn } from '../utils/feature.util';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   template: '',
@@ -18,16 +18,20 @@ export class BasePage {
   styleSheet: StyleSheet;
 
   constructor(
-    public ngRedux: NgRedux<AppState>
+    public ngRedux: NgRedux<AppState>,
+    @Inject(Boolean) shouldNotLoadConfig = false
   ) {
-    this.loadConfig();
+    if (!shouldNotLoadConfig) {
+      this.loadConfig();
+    }
   }
 
   onConfigLoad() { }
 
   isFeatureOn(feature: FeatureType): boolean {
+    // @TODO if not config, does it mean all features are on????
     // return false when config is not loaded
-    return this.config.features !== undefined
+    return this.config !== undefined && this.config.features !== undefined
       && isFeatureOn(this.config.features, feature);
   }
 
@@ -46,6 +50,8 @@ export class BasePage {
             }
           });
       this.ngRedux.dispatch(getConfig());
+    } else {
+      this.onConfigLoad();
     }
   }
 
