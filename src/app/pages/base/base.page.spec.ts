@@ -5,10 +5,10 @@ import {
 } from '@angular-redux/store/testing';
 
 import { BasePage } from './base.page';
-import { AppState, ConfigState } from '../typings/state.typing';
-import { FeatureType } from '../typings/feature.typing';
-import { getConfig } from '../actions/config.action';
-import { initialState } from '../stores/';
+import { AppState, ConfigState } from '../../typings/state.typing';
+import { FeatureType } from '../../typings/feature.typing';
+import { getConfig } from '../../actions/config.action';
+import { initialState } from '../../stores';
 
 let component: BasePage;
 let fixture: ComponentFixture<BasePage>;

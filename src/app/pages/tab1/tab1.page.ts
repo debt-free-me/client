@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Styles } from 'jss';
 import { createStyleSheet } from '../../utils/jss.util';
-import { BasePage } from '../base.page';
+import { BasePage } from '../base/base.page';
 import { NgRedux } from '@angular-redux/store';
 import { AppState } from 'src/app/typings/state.typing';
 

@@ -5,8 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Styles } from 'jss';
 import { takePhoto } from 'src/app/actions/tab2.action';
 import { AppState, Tab2State } from 'src/app/typings/state.typing';
-import { BasePage } from '../base.page';
-import { ConfigService } from 'src/app/services/config.service';
+import { BasePage } from '../base/base.page';
 import { FeatureType } from 'src/app/typings/feature.typing';
 import { createStyleSheet } from 'src/app/utils/jss.util';
 

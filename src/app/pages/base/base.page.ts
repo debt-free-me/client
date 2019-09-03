@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { NgRedux } from '@angular-redux/store';
 import { StyleSheet } from 'jss';
-import { ConfigState, AppState } from '../typings/state.typing';
+import { ConfigState, AppState } from '../../typings/state.typing';
 import { Subscription } from 'indefinite-observable';
-import { getConfig } from '../actions/config.action';
-import { initialState } from '../stores/config.store';
-import { FeatureType } from '../typings/feature.typing';
-import { isFeatureOn } from '../utils/feature.util';
+import { getConfig } from '../../actions/config.action';
+import { initialState } from '../../stores/config.store';
+import { FeatureType } from '../../typings/feature.typing';
+import { isFeatureOn } from '../../utils/feature.util';
 import { Component, Inject } from '@angular/core';
 
 @Component({
