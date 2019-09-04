@@ -48,13 +48,13 @@ export class Tab2Page extends BasePage implements OnInit, OnDestroy {
     ngRedux: NgRedux<AppState>,
     public photoService: PhotoService
   ) {
-    super(ngRedux, true);
+    super(ngRedux);
     const initialStyles = {
       ...styles,
       ...variableStyles,
     };
     this.styleSheet = createStyleSheet(initialStyles);
-    super.loadConfig();
+    this.onConfigLoad();
   }
 
   ngOnInit() {

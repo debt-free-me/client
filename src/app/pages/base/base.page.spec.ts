@@ -12,13 +12,6 @@ import { initialState } from '../../stores';
 
 let component: BasePage;
 let fixture: ComponentFixture<BasePage>;
-const stub = MockNgRedux.getSelectorStub<AppState, AppState>();
-
-function stubConfigState(state: AppState) {
-  stub.next(state);
-  stub.complete();
-  fixture.detectChanges();
-}
 
 function createInstance() {
   fixture = TestBed.createComponent(BasePage);
@@ -32,10 +25,7 @@ describe('BasePage', () => {
       declarations: [BasePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [NgReduxTestingModule],
-      providers: [
-        MockNgRedux,
-        { provide: Boolean, useValue: true },
-      ],
+      providers: [MockNgRedux],
     }).compileComponents();
   }));
 
@@ -60,33 +50,7 @@ describe('BasePage', () => {
   it('should load config', () => {
     spyOn(component.ngRedux, 'dispatch');
     spyOn(component.ngRedux, 'getState').and.returnValue(initialState);
-    component.ngRedux.
-      select((state: AppState) => state.config)
-      .subscribe(
-        (configState: ConfigState) => {
-          expect(configState).toEqual(initialState.config);
-        });
     component.loadConfig();
-    expect(component.ngRedux.dispatch).toHaveBeenCalledWith(getConfig());
-  });
-
-  it('should assign config', () => {
-    spyOn(component.ngRedux, 'dispatch');
-    const state: ConfigState = {
-      features: {
-        [FeatureType.Camera]: true,
-      },
-    };
-    stubConfigState(<AppState>{
-      config: state,
-    });
-    component.ngRedux.
-      select((appState: AppState) => appState.config)
-      .subscribe(
-        (configState: ConfigState) => {
-          expect(configState).toEqual(state);
-        });
-    component.loadConfig();
-    expect(component.ngRedux.dispatch).not.toHaveBeenCalled();
+    expect(component.config).toEqual(initialState.config);
   });
 });
