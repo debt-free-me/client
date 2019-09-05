@@ -20,7 +20,7 @@
     <p>isLoading: {{ isLoading }}</p>
     <div [class]="styleSheet.classes.cameraIcon">
       <ion-fab-button
-        [disabled]="!isFeatureOn('camera')"
+        [disabled]="shouldDisableCamera"
         (click)="onCameraClick()"
       >
         <ion-icon name="camera"></ion-icon>

@@ -44,6 +44,10 @@ export class Tab2Page extends BasePage implements OnInit, OnDestroy {
   isLoading: boolean;
   stateSubscription: Subscription;
 
+  get shouldDisableCamera(): boolean {
+    return !this.isFeatureOn(FeatureType.Camera);
+  }
+
   constructor(
     ngRedux: NgRedux<AppState>,
     public photoService: PhotoService
