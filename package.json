@@ -15,13 +15,12 @@
     "build": "npm run config && ng build",
     "build:ionic": "npm run config && ionic build",
     "test": "npm run config && ng test",
-    "build:deploy": "npm run config && ng lint && ng test && ionic build",
+    "build:pipeline": "npm run config && ng lint && ng test && ionic build",
     "serve:web": "npm run config:web && ionic serve --lab",
     "start:web": "npm run config:web && ng serve",
     "build:web": "npm run config:web && ng build",
-    "build:ionic:web": "npm run config:web && ionic build",
     "test:web": "npm run config:web && ng test",
-    "build:web:deploy": "npm run config:web && ng lint && ng test && ionic build"
+    "build:web:pipeline": "npm run config:web && ng lint && ng test && ng build"
   },
   "private": true,
   "dependencies": {

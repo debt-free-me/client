@@ -9,7 +9,7 @@ phases:
       - npm install
   build:
     commands:
-      - npm run build:pipeline -- --prod
+      - npm run build:web:pipeline -- --prod
 artifacts:
   files:
     - '**/*'
