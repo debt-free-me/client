@@ -1,83 +1,73 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  HttpClientTestingModule, HttpTestingController
-} from '@angular/common/http/testing';
-import {
   NgReduxTestingModule, MockNgRedux
 } from '@angular-redux/store/testing';
-import { ConfigLoadGuard } from './config-load.guard';
+import { Subject } from 'rxjs';
+import { ConfigLoadGuard, configStateSelector } from './config-load.guard';
 import { ConfigState, AppState } from '../typings/state.typing';
 import { FeatureType } from '../typings/feature.typing';
 import { getConfig } from '../actions/config.action';
 import { initialState } from '../stores/config.store';
 
-
-
-function stubConfigState(stub, state: AppState) {
+let stub: Subject<ConfigState>;
+function stubConfigState(state: ConfigState) {
   stub.next(state);
   stub.complete();
 }
 
 xdescribe('ConfigLoadGuard', () => {
-  let stub;
   let guard: ConfigLoadGuard;
+
   beforeEach(() => {
+
+    // MockNgRedux.reset();
     TestBed.configureTestingModule({
       imports: [NgReduxTestingModule],
       providers: [MockNgRedux, ConfigLoadGuard],
     });
     guard = TestBed.get(ConfigLoadGuard);
-    stub = MockNgRedux.getSelectorStub<AppState, AppState>();
+
+    stub = MockNgRedux
+      .getSelectorStub<AppState, ConfigState>(configStateSelector);
   });
 
-  it('should load config when retrieved', (done: DoneFn) => {
+
+
+  it('should get config', async (done: DoneFn) => {
+
+    stubConfigState(initialState);
+    // const promise: Promise<ConfigState> = guard.loadConfig();
+    // const dispatchSpy = spyOn(guard.ngRedux, 'dispatch');
+    // const selectSpy = spyOn(guard.ngRedux, 'select');
+
+    // promise.then((configState: ConfigState) => {
+    //   console.log('promise then');
+    //   expect(configState).toEqual(initialState);
+    //   done();
+    // });
+
+    // expect(dispatchSpy).toHaveBeenCalledWith(getConfig());
+    // expect(guard.ngRedux.select).toHaveBeenCalled();
+    expect(await guard.loadConfig()).toEqual(initialState);
+  });
+
+  it('should load config', (done: DoneFn) => {
     // const onConfigChange = jasmine.createSpy('onConfigChange');
-    stubConfigState(stub, <AppState>{
-      config: initialState,
-    });
-    const promise: Promise<ConfigState> = guard.loadConfig();
-    console.log('mock instance ', MockNgRedux.getInstance().select().pipe);
-    const spy = spyOn(MockNgRedux.getInstance(), 'dispatch');
     const expectedConfig: ConfigState = {
       features: {
         [FeatureType.Camera]: true,
       },
     };
+    const promise: Promise<ConfigState> = guard.loadConfig();
 
-    stubConfigState(stub, <AppState>{
-      config: expectedConfig,
-    });
-    guard.ngRedux.select((state: AppState) => state.config)
-      .subscribe((config: ConfigState) => {
-        console.log('config ', config);
-      });
+    stubConfigState(expectedConfig);
 
-    stubConfigState(stub, <AppState>{
-      config: expectedConfig,
-    });
-    promise.then((config: ConfigState) => {
-      console.log('got here');
-      expect(config).toEqual(expectedConfig);
+    promise.then((configState: ConfigState) => {
+      // console.log('promise then', configState);
+      expect(configState).toEqual(expectedConfig);
       done();
     });
 
-    // expect(spy).toHaveBeenCalledWith(getConfig());
-
-    // expect(onConfigChange).toHaveBeenCalledTimes(1);
-    // expect(onConfigChange).toHaveBeenCalledWith(expectedConfig);
-  });
-
-  it('should NOT load config after initialization', () => {
-    const onConfigChange = jasmine.createSpy('onConfigChange');
-    const expectedConfig: ConfigState = initialState;
-    const promise: Promise<ConfigState> = guard.loadConfig();
-
-    stubConfigState(stub, <AppState>{
-      config: expectedConfig,
-    });
-
-    promise.then(onConfigChange);
-
-    expect(onConfigChange).toHaveBeenCalledTimes(0);
+    // expect(onConfigChange).toHaveBeenCalledTimes(0);
   });
 });

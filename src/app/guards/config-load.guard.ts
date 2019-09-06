@@ -3,12 +3,17 @@ import {
   CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot
 } from '@angular/router';
 import { tap, filter, take } from 'rxjs/operators';
-import { NgRedux } from '@angular-redux/store';
+import { NgRedux, Selector } from '@angular-redux/store';
 
 import { AppState, ConfigState } from '../typings/state.typing';
 import { getConfig } from '../actions/config.action';
 import { isConfigValid } from '../utils/config.util';
 
+export const configStateSelector: Selector<AppState, ConfigState> =
+  (appState: AppState) => {
+    // console.log('app state ', appState);
+    return appState.config;
+  };
 @Injectable()
 export class ConfigLoadGuard implements CanActivate {
   constructor(public ngRedux: NgRedux<AppState>) { }
@@ -26,11 +31,9 @@ export class ConfigLoadGuard implements CanActivate {
   }
 
   loadConfig(): Promise<ConfigState> {
-    console.log('loadconfig');
     return this.ngRedux.
-      select((appState: AppState) => appState.config).pipe(
+      select(configStateSelector).pipe(
         tap((configState: ConfigState) => {
-          console.log('tapping config ', configState);
           if (!isConfigValid(configState)) {
             this.ngRedux.dispatch(getConfig());
           }
