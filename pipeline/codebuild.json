@@ -1,0 +1,51 @@
+{
+  "projects": [
+    {
+      "name": "DebtFreeMeClientBuild",
+      "arn": "arn:aws:codebuild:ap-southeast-2:080957313442:project/DebtFreeMeClientBuild",
+      "source": {
+        "type": "CODEPIPELINE",
+        "buildspec": "pipeline/buildspec.yml",
+        "insecureSsl": false
+      },
+      "secondarySourceVersions": [],
+      "artifacts": {
+        "type": "CODEPIPELINE",
+        "name": "DebtFreeMeClientBuild",
+        "packaging": "NONE",
+        "encryptionDisabled": false
+      },
+      "cache": {
+        "type": "NO_CACHE"
+      },
+      "environment": {
+        "type": "LINUX_CONTAINER",
+        "image": "aws/codebuild/amazonlinux2-x86_64-standard:1.0",
+        "computeType": "BUILD_GENERAL1_SMALL",
+        "environmentVariables": [],
+        "privilegedMode": false,
+        "imagePullCredentialsType": "CODEBUILD"
+      },
+      "serviceRole": "arn:aws:iam::080957313442:role/service-role/codebuild-DebtFreeMeClientBuild-service-role",
+      "timeoutInMinutes": 60,
+      "queuedTimeoutInMinutes": 480,
+      "encryptionKey": "arn:aws:kms:ap-southeast-2:080957313442:alias/aws/s3",
+      "tags": [],
+      "created": 1567723262.787,
+      "lastModified": 1567988977.645,
+      "badge": {
+        "badgeEnabled": false
+      },
+      "logsConfig": {
+        "cloudWatchLogs": {
+          "status": "ENABLED"
+        },
+        "s3Logs": {
+          "status": "DISABLED",
+          "encryptionDisabled": false
+        }
+      }
+    }
+  ],
+  "projectsNotFound": []
+}
