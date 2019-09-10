@@ -1,0 +1,39 @@
+{
+  "name": "debtfreemeclient-build",
+  "source": {
+    "type": "CODEPIPELINE",
+    "buildspec": "pipeline/buildspec.yml",
+    "insecureSsl": false
+  },
+  "secondarySourceVersions": [],
+  "artifacts": {
+    "type": "CODEPIPELINE",
+    "name": "debtfreemeclient-build",
+    "packaging": "NONE",
+    "encryptionDisabled": false
+  },
+  "cache": {
+    "type": "NO_CACHE"
+  },
+  "environment": {
+    "type": "LINUX_CONTAINER",
+    "image": "aws/codebuild/amazonlinux2-x86_64-standard:1.0",
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "environmentVariables": [],
+    "privilegedMode": false,
+    "imagePullCredentialsType": "CODEBUILD"
+  },
+  "serviceRole": "arn:aws:iam::{{aws-account-id}}:role/debtfreemeclient-codebuild-role",
+  "timeoutInMinutes": 60,
+  "queuedTimeoutInMinutes": 480,
+  "tags": [],
+  "logsConfig": {
+    "cloudWatchLogs": {
+      "status": "ENABLED"
+    },
+    "s3Logs": {
+      "status": "DISABLED",
+      "encryptionDisabled": false
+    }
+  }
+}

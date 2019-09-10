@@ -1,0 +1,1 @@
+aws s3api create-bucket --bucket debtfreemeclient-codepipeline-ap-southeast-2-bucket --region ap-southeast-2 --create-bucket-configuration LocationConstraint=ap-southeast-2
