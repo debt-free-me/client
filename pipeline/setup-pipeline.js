@@ -5,23 +5,25 @@ const _ = require('lodash');
 const { execSync } = require('child_process');
 
 program
-  .option('--token [token]', 'github oauth token')
   .option('--account-id [accountId]', 'aws account id')
+  .option('--token [token]', 'github oauth token')
+  .option('--secret [secret]', 'github auth secret')
+  .option('--verbose', 'output extra info')
   .option(
     '--no-execution',
     'flag for not executing script to create aws pipeline'
-  )
-  .opiton('--verbose', 'output extra info');
+  );
 
 program.parse(process.argv);
 
 const token = program.token;
+const secret = program.secret;
 const accountId = program.accountId;
 const toExecute = program.execution;
 const verbose = program.verbose;
 
-if (_.isEmpty(token) || _.isEmpty(accountId)) {
-  console.log('--token and --account-id required');
+if (_.isEmpty(token) || _.isEmpty(secret) || _.isEmpty(accountId)) {
+  console.log('--token, --secret and --account-id required');
   return;
 }
 
@@ -37,7 +39,8 @@ try {
     const result = content
       .toString()
       .replace(/\{\{aws-account\-id\}\}/g, accountId)
-      .replace(/\{\{github\-oauth\-token\}\}/g, token);
+      .replace(/\{\{github\-oauth\-token\}\}/g, token)
+      .replace(/\{\{github\-auth\-secret\}\}/g, secret);
     const destFilePath = `${destDir}${file}`;
     fs.writeFileSync(destFilePath, result);
   }

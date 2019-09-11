@@ -1,0 +1,17 @@
+{
+  "webhook": {
+    "name": "debtfreemeclient-source-webhook",
+    "targetPipeline": "debtfreemeclient-pipeline",
+    "targetAction": "Source",
+    "filters": [
+      {
+        "jsonPath": "$.ref",
+        "matchEquals": "refs/heads/{Branch}"
+      }
+    ],
+    "authentication": "GITHUB_HMAC",
+    "authenticationConfiguration": {
+      "SecretToken": "{{github-auth-secret}}"
+    }
+  }
+}

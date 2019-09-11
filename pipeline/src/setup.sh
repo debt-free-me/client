@@ -5,4 +5,5 @@ bash attach-policies.sh &&
 # need to wait the service role to be available?????
 sleep 10 &&
 bash create-codebuild.sh && 
-bash create-codepipeline.sh
+bash create-codepipeline.sh &&
+base attach-codepipeline-webhook.sh
