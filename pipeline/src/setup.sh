@@ -6,4 +6,4 @@ bash attach-policies.sh &&
 sleep 10 &&
 bash create-codebuild.sh && 
 bash create-codepipeline.sh &&
-base attach-codepipeline-webhook.sh
+bash attach-codepipeline-webhook.sh

@@ -4,8 +4,8 @@
     {
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:logs:ap-southeast-2:{{aws-account-id}}:log-group:/aws/codebuild/debtfreemeclient-build",
-        "arn:aws:logs:ap-southeast-2:{{aws-account-id}}:log-group:/aws/codebuild/debtfreemeclient-build:*"
+        "arn:aws:logs:{{aws-region}}:{{aws-account-id}}:log-group:/aws/codebuild/debtfreemeclient-build",
+        "arn:aws:logs:{{aws-region}}:{{aws-account-id}}:log-group:/aws/codebuild/debtfreemeclient-build:*"
       ],
       "Action": [
         "logs:CreateLogGroup",
@@ -16,7 +16,7 @@
     {
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:s3:::debtfreemeclient-codepipeline-ap-southeast-2-*"
+        "arn:aws:s3:::debtfreemeclient-codepipeline-{{aws-region}}-*"
       ],
       "Action": [
         "s3:PutObject",
