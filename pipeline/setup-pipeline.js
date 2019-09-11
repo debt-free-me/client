@@ -7,11 +7,11 @@ const { execSync } = require('child_process');
 program
   .option('--account-id [accountId]', 'aws account id')
   .option('--region [region]', 'aws region')
-  .option('--token [token]', 'github oauth token')
-  .option('--secret [secret]', 'github auth secret')
+  .option('--token [token]', 'github oauth token for aws to connect')
+  .option('--secret [secret]', 'aws auth secret for github webhook')
   .option(
     '--no-execution',
-    'flag for not executing script to create aws pipeline'
+    'flag for not executing script for creating aws pipeline'
   )
   .option('--verbose', 'output extra info');
 
@@ -48,7 +48,7 @@ try {
       .replace(/\{\{aws\-account\-id\}\}/g, accountId)
       .replace(/\{\{aws\-region\}\}/g, region)
       .replace(/\{\{github\-oauth\-token\}\}/g, token)
-      .replace(/\{\{github\-auth\-secret\}\}/g, secret);
+      .replace(/\{\{webhook\-auth\-secret\}\}/g, secret);
     const destFilePath = `${destDir}${file}`;
     fs.writeFileSync(destFilePath, result);
   }
