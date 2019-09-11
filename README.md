@@ -40,3 +40,7 @@
 
 - Run 'npm run config && ionic cordova build ios'
 - For more info https://ionicframework.com/docs/cli/commands/cordova-build
+
+## How to Setup AWS Pipeline
+
+- Run 'npm run setup-pipeline -- --token {{GITHUB_OAUTH_TOKEN}} --account-id {{AWS_ACCOUNT_ID}} [--no-execution]' (with --no-execution option, the scripts for setting up the pipeline are generated without execution)

@@ -20,7 +20,8 @@
     "start:web": "npm run config:web && ng serve",
     "build:web": "npm run config:web && ng build",
     "test:web": "npm run config:web && ng test",
-    "build:web:pipeline": "npm run config:web && ng lint && ng test && ng build"
+    "build:web:pipeline": "npm run config:web && ng lint && ng test && ng build",
+    "setup-pipeline": "cd pipeline && node setup-pipeline.js"
   },
   "private": true,
   "dependencies": {
@@ -75,6 +76,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^10.14.17",
     "codelyzer": "^5.1.0",
+    "commander": "^3.0.1",
     "cp-cli": "^2.0.0",
     "ionic": "^5.2.7",
     "jasmine-core": "~2.99.1",
