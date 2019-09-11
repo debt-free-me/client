@@ -1,14 +1,14 @@
 {
-  "name": "debtfreemeclient-build",
+  "name": "{{prefix}}-build",
   "source": {
     "type": "CODEPIPELINE",
-    "buildspec": "pipeline/buildspec.yml",
+    "buildspec": "{{buildspec}}",
     "insecureSsl": false
   },
   "secondarySourceVersions": [],
   "artifacts": {
     "type": "CODEPIPELINE",
-    "name": "debtfreemeclient-build",
+    "name": "{{prefix}}-build",
     "packaging": "NONE",
     "encryptionDisabled": false
   },
@@ -23,7 +23,7 @@
     "privilegedMode": false,
     "imagePullCredentialsType": "CODEBUILD"
   },
-  "serviceRole": "arn:aws:iam::{{aws-account-id}}:role/debtfreemeclient-codebuild-role",
+  "serviceRole": "arn:aws:iam::{{aws-account-id}}:role/{{prefix}}-codebuild-role",
   "timeoutInMinutes": 60,
   "queuedTimeoutInMinutes": 480,
   "tags": [],

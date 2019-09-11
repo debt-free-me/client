@@ -1,1 +1,1 @@
-aws iam attach-role-policy --policy-arn arn:aws:iam::{{aws-account-id}}:policy/debtfreemeclient-codepipeline-policy --role-name debtfreemeclient-codepipeline-role 
+aws iam attach-role-policy --policy-arn arn:aws:iam::{{aws-account-id}}:policy/{{prefix}}-codepipeline-policy --role-name {{prefix}}-codepipeline-role 

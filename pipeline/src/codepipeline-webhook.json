@@ -1,7 +1,7 @@
 {
   "webhook": {
-    "name": "debtfreemeclient-source-webhook",
-    "targetPipeline": "debtfreemeclient-pipeline",
+    "name": "{{prefix}}-source-webhook",
+    "targetPipeline": "{{prefix}}-pipeline",
     "targetAction": "Source",
     "filters": [
       {

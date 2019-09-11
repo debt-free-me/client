@@ -43,4 +43,5 @@
 
 ## How to Setup AWS Pipeline
 
-- Run 'npm run setup-pipeline -- --account-id <AWS_ACCOUNT_ID> --region <AWS_REGION> --token <GITHUB_OAUTH_TOKEN> --secret <WEBHOOK_AUTH_SECRET> [--no-execution][--verbose]' (with --no-execution option, the scripts for setting up the pipeline are generated without execution)
+- Run 'npm run setup-pipeline -- --account-id <AWS_ACCOUNT_ID> --token <GITHUB_OAUTH_TOKEN> --secret <WEBHOOK_AUTH_SECRET> --prefix <PREFIX> --repo-owner <GITHUB_REPO_OWNER> --repo-name <GITHUB_REPO_NAME> [--repo-branch <GITHUB_REPO_BRANCH>] [--region <AWS_REGION>] [--buildspec <BUILDSPEC>] [--no-execution] [--verbose]' 
+- --no-execution: generating scripts for setting up pipeline without execution

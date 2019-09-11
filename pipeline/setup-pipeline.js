@@ -6,9 +6,17 @@ const { execSync } = require('child_process');
 
 program
   .option('--account-id [accountId]', 'aws account id')
-  .option('--region [region]', 'aws region')
   .option('--token [token]', 'github oauth token for aws to connect')
   .option('--secret [secret]', 'aws auth secret for github webhook')
+  .option('--prefix [prefix]', 'pipeline prefix')
+  .option('--repo-name [repo-name]', 'repo name')
+  .option('--repo-owner [repo-owner]', 'repo owner')
+  .option('--repo-branch [reop-branch', 'repo branch')
+  .option('--region [region]', 'aws region')
+  .option(
+    '--buildspec [buildspec]',
+    'path to buildspec file relative to the root dir of the repo'
+  )
   .option(
     '--no-execution',
     'flag for not executing script for creating aws pipeline'
@@ -18,19 +26,28 @@ program
 program.parse(process.argv);
 
 const accountId = program.accountId;
-const region = program.region;
 const token = program.token;
 const secret = program.secret;
+const prefix = program.prefix;
+const repoName = program.repoName;
+const repoOwner = program.repoOwner;
+const repoBranch = program.repoBranch || 'master';
+const region = program.region || 'ap-southeast-2';
+const buildspec = program.buildspec || 'pipeline/buildspec.yml';
 const toExecute = program.execution;
 const verbose = program.verbose;
 
 if (
-  _.isEmpty(region) ||
   _.isEmpty(accountId) ||
   _.isEmpty(token) ||
-  _.isEmpty(secret)
+  _.isEmpty(secret) ||
+  _.isEmpty(prefix) ||
+  _.isEmpty(repoName) ||
+  _.isEmpty(repoOwner)
 ) {
-  console.log('--account-id, --region, --token, and --secret are required');
+  console.log(
+    '--account-id, --token, --secret, --prefix, --repo-name, and --repo-owner are required'
+  );
   return;
 }
 
@@ -46,9 +63,15 @@ try {
     const result = content
       .toString()
       .replace(/\{\{aws\-account\-id\}\}/g, accountId)
-      .replace(/\{\{aws\-region\}\}/g, region)
       .replace(/\{\{github\-oauth\-token\}\}/g, token)
-      .replace(/\{\{webhook\-auth\-secret\}\}/g, secret);
+      .replace(/\{\{webhook\-auth\-secret\}\}/g, secret)
+      .replace(/\{\{prefix\}\}/g, prefix)
+      .replace(/\{\{github\-repo\-name\}\}/g, repoName)
+      .replace(/\{\{github\-repo\-owner\}\}/g, repoOwner)
+      .replace(/\{\{github\-repo\-branch\}\}/g, repoBranch)
+      .replace(/\{\{aws\-region\}\}/g, region)
+      .replace(/\{\{buildspec\}\}/g, buildspec);
+
     const destFilePath = `${destDir}${file}`;
     fs.writeFileSync(destFilePath, result);
   }

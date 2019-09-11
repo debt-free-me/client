@@ -1,10 +1,10 @@
 {
   "pipeline": {
-    "name": "debtfreemeclient-pipeline",
-    "roleArn": "arn:aws:iam::{{aws-account-id}}:role/debtfreemeclient-codepipeline-role",
+    "name": "{{prefix}}-pipeline",
+    "roleArn": "arn:aws:iam::{{aws-account-id}}:role/{{prefix}}-codepipeline-role",
     "artifactStore": {
       "type": "S3",
-      "location": "debtfreemeclient-codepipeline-{{aws-region}}-bucket"
+      "location": "{{prefix}}-codepipeline-{{aws-region}}-bucket"
     },
     "stages": [
       {
@@ -20,11 +20,11 @@
             },
             "runOrder": 1,
             "configuration": {
-              "Branch": "master",
+              "Owner": "{{github-repo-owner}}",
+              "Repo": "{{github-repo-name}}",
+              "Branch": "{{github-repo-branch}}",
               "OAuthToken": "{{github-oauth-token}}",
-              "Owner": "debt-free-me",
-              "PollForSourceChanges": "false",
-              "Repo": "client"
+              "PollForSourceChanges": "false"
             },
             "outputArtifacts": [
               {
@@ -49,7 +49,7 @@
             },
             "runOrder": 1,
             "configuration": {
-              "ProjectName": "debtfreemeclient-build"
+              "ProjectName": "{{prefix}}-build"
             },
             "outputArtifacts": [
               {
