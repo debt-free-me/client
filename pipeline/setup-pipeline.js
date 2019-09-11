@@ -10,13 +10,15 @@ program
   .option(
     '--no-execution',
     'flag for not executing script to create aws pipeline'
-  );
+  )
+  .opiton('--verbose', 'output extra info');
 
 program.parse(process.argv);
 
 const token = program.token;
 const accountId = program.accountId;
 const toExecute = program.execution;
+const verbose = program.verbose;
 
 if (_.isEmpty(token) || _.isEmpty(accountId)) {
   console.log('--token and --account-id required');
@@ -41,7 +43,10 @@ try {
   }
   if (toExecute) {
     console.log('Executing scripts...');
-    console.log(execSync(`cd ${destDir} && bash setup.sh`).toString());
+    const buffer = execSync(`cd ${destDir} && bash setup.sh`);
+    if (verbose) {
+      console.log(buffer.toString());
+    }
     console.log('Process completed.');
   }
 } catch (error) {
