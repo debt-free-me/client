@@ -4,7 +4,7 @@
     "roleArn": "arn:aws:iam::{{aws-account-id}}:role/{{prefix}}-codepipeline-role",
     "artifactStore": {
       "type": "S3",
-      "location": "{{prefix}}-codepipeline-{{aws-region}}-bucket"
+      "location": "{{prefix}}-codepipeline-{{aws-account-id}}-{{aws-region}}-s3"
     },
     "stages": [
       {

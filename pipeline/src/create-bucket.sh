@@ -1,1 +1,1 @@
-aws s3api create-bucket --bucket {{prefix}}-codepipeline-{{aws-region}}-bucket --region {{aws-region}} --create-bucket-configuration LocationConstraint={{aws-region}}
+aws s3api create-bucket --bucket {{prefix}}-codepipeline-{{aws-account-id}}-{{aws-region}}-s3 --region {{aws-region}} --create-bucket-configuration LocationConstraint={{aws-region}}
