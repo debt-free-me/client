@@ -16,7 +16,7 @@
     {
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:s3:::{{prefix}}-codepipeline-{{aws-region}}-*"
+        "arn:aws:s3:::{{prefix}}-codepipeline-{{aws-account-id}}-{{aws-region}}-s3/*"
       ],
       "Action": [
         "s3:PutObject",
