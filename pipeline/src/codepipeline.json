@@ -64,6 +64,32 @@
             "region": "{{aws-region}}"
           }
         ]
+      },
+      {
+        "name": "Deploy",
+        "actions": [
+          {
+            "name": "Deploy",
+            "actionTypeId": {
+              "category": "Deploy",
+              "owner": "AWS",
+              "provider": "S3",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "BucketName": "{{prefix}}-website-{{aws-account-id}}-{{aws-region}}-s3",
+              "Extract": "true"
+            },
+            "outputArtifacts": [],
+            "inputArtifacts": [
+              {
+                "name": "BuildArtifact"
+              }
+            ],
+            "region": "{{aws-region}}"
+          }
+        ]
       }
     ],
     "version": 2

@@ -1,4 +1,5 @@
-bash create-bucket.sh && 
+bash create-source-bucket.sh && 
+bash create-target-bucket.sh &&
 bash create-roles.sh && 
 bash create-policies.sh && 
 bash attach-policies.sh &&
