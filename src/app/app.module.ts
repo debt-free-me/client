@@ -27,7 +27,8 @@ import { environment } from 'src/environments/environment';
 import { Tab2Service } from './services/tab2.service';
 import { ConfigMiddleware } from './middlewares/config.middleware';
 import { ConfigService } from './services/config.service';
-import { ConfigLoadGuard } from './guards/config-load.guard';
+import { ConfigGuard } from './guards/config.guard';
+import { ConfigStateService } from './services/config-state.service';
 
 jss.setup(preset());
 
@@ -48,9 +49,10 @@ jss.setup(preset());
     Camera,
     Tab2Middleware,
     ConfigMiddleware,
-    ConfigLoadGuard,
+    ConfigGuard,
     Tab2Service,
     ConfigService,
+    ConfigStateService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

@@ -6,6 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
+import { ConfigStateService } from './services/config-state.service';
+import { AuthService } from './services/auth.service';
+import {
+  NgReduxTestingModule, MockNgRedux
+} from '@angular-redux/store/testing';
+import { AppRoutingModule } from './app-routing.module';
 
 describe('AppComponent', () => {
 
@@ -20,10 +26,13 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [NgReduxTestingModule, AppRoutingModule],
       providers: [
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
+        ConfigStateService,
+        AuthService,
       ],
     }).compileComponents();
   }));

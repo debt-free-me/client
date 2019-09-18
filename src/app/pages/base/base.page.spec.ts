@@ -39,11 +39,11 @@ describe('BasePage', () => {
 
   it('should detect correctly if a feature is on', () => {
     const feature = <FeatureType>'testFeature';
-    component.config = { features: undefined };
+    component.config = { features: undefined, settings: undefined };
     expect(component.isFeatureOn(feature)).toBe(false);
-    component.config = { features: { [feature]: false } };
+    component.config = { features: { [feature]: false }, settings: undefined };
     expect(component.isFeatureOn(feature)).toBe(false);
-    component.config = { features: { [feature]: true } };
+    component.config = { features: { [feature]: true }, settings: undefined };
     expect(component.isFeatureOn(feature)).toBe(true);
   });
 

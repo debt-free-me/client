@@ -6,7 +6,9 @@ import { ConfigState } from '../typings/state.typing';
 
 describe('Config reducer', () => {
   it('should correctly update state for GetConfigSuccess action', () => {
-    const expectedConfig: ConfigState = { features: { camera: false } };
+    const expectedConfig: ConfigState = {
+      features: { camera: false }, settings: undefined,
+    };
     const action = createAction(
       ConfigActionType.GetConfigSuccess, expectedConfig
     );

@@ -1,4 +1,4 @@
-import { FeatureType } from './feature.typing';
+import { FeatureType, SettingType } from './feature.typing';
 
 // general state type, for categorization purposes
 // tslint:disable-next-line: no-empty-interface
@@ -17,4 +17,5 @@ export interface Tab2State extends State {
 
 export interface ConfigState extends State {
   features: Record<FeatureType, boolean>;
+  settings: Record<SettingType, string>;
 }

@@ -3,7 +3,9 @@ import {
   NgReduxTestingModule, MockNgRedux
 } from '@angular-redux/store/testing';
 import { Subject } from 'rxjs';
-import { ConfigLoadGuard, configStateSelector } from './config-load.guard';
+import {
+  ConfigStateService, configStateSelector
+} from './config-state.service';
 import { ConfigState, AppState } from '../typings/state.typing';
 import { FeatureType } from '../typings/feature.typing';
 import { getConfig } from '../actions/config.action';
@@ -15,23 +17,20 @@ function stubConfigState(state: ConfigState) {
   stub.complete();
 }
 
-xdescribe('ConfigLoadGuard', () => {
-  let guard: ConfigLoadGuard;
+xdescribe('ConfigStateService', () => {
+  let service: ConfigStateService;
 
   beforeEach(() => {
-
     // MockNgRedux.reset();
     TestBed.configureTestingModule({
       imports: [NgReduxTestingModule],
-      providers: [MockNgRedux, ConfigLoadGuard],
+      providers: [MockNgRedux, ConfigStateService],
     });
-    guard = TestBed.get(ConfigLoadGuard);
+    service = TestBed.get(ConfigStateService);
 
     stub = MockNgRedux
       .getSelectorStub<AppState, ConfigState>(configStateSelector);
   });
-
-
 
   it('should get config', async (done: DoneFn) => {
 
@@ -48,7 +47,7 @@ xdescribe('ConfigLoadGuard', () => {
 
     // expect(dispatchSpy).toHaveBeenCalledWith(getConfig());
     // expect(guard.ngRedux.select).toHaveBeenCalled();
-    expect(await guard.loadConfig()).toEqual(initialState);
+    expect(await service.load()).toEqual(initialState);
   });
 
   it('should load config', (done: DoneFn) => {
@@ -57,8 +56,9 @@ xdescribe('ConfigLoadGuard', () => {
       features: {
         [FeatureType.Camera]: true,
       },
+      settings: undefined,
     };
-    const promise: Promise<ConfigState> = guard.loadConfig();
+    const promise: Promise<ConfigState> = service.load();
 
     stubConfigState(expectedConfig);
 

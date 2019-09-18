@@ -17,7 +17,10 @@ describe('Config middleware', () => {
   let middleware: ConfigMiddleware;
   let service: jasmine.SpyObj<ConfigService>;
 
-  const expectedData: ConfigState = { features: { camera: true } };
+  const expectedData: ConfigState = {
+    features: { camera: true },
+    settings: undefined,
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({

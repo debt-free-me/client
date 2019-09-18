@@ -12,6 +12,6 @@ export class ConfigService {
   }
 
   getConfigSync(): ConfigState {
-    return config;
+    return <ConfigState>config;
   }
 }
