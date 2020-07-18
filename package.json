@@ -55,7 +55,7 @@
     "flux-standard-action": "^2.1.1",
     "jss": "^9.8.7",
     "jss-preset-default": "^4.5.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "rxjs": "^6.5.2",
